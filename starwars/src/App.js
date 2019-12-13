@@ -1,8 +1,15 @@
 // import React from 'react';
-import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import styled from "styled-components";
 import StarWarsChar from "./components/StarWarsChar"
+import './App.css';
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 const App = () => {
   const [starWarschar, setStarWarsChar] = useState([]);
@@ -25,11 +32,13 @@ const App = () => {
   return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-      {starWarschar.map(char => {
-      return <StarWarsChar char={char} key={char.name} />
-      })}
-   </div>
+      <Div>
+     {starWarschar.map(char => {
+      return <StarWarsChar char={char} key={char.name} />;
+     })}
+     </Div>
+    </div>
     );
-  }
+  };
 
 export default App;
