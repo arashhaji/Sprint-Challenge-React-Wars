@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styled from "styled-components";
 import StarWarsChar from "./components/StarWarsChar"
+// import Pages from "./components/Pagination";
 import './App.css';
 
 const Div = styled.div`
@@ -13,6 +14,7 @@ const Div = styled.div`
 
 const App = () => {
   const [starWarschar, setStarWarsChar] = useState([]);
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber)
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -35,6 +37,7 @@ const App = () => {
       <Div>
      {starWarschar.map(char => {
       return <StarWarsChar char={char} key={char.name} />;
+      // <Pages peoplePerPage={pplPerPage} totalPeople={people.length} paginate={paginate}/>
      })}
      </Div>
     </div>
