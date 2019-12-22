@@ -1,7 +1,20 @@
-import React from 'react';
+// import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import styled from "styled-components";
+import StarWarsChar from "./components/StarWarsChar"
+// import Pages from "./components/Pagination";
 import './App.css';
 
+const Div = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 const App = () => {
+  const [starWarschar, setStarWarsChar] = useState([]);
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber)
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -9,11 +22,26 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
 
+  useEffect(()=> {
+    axios.get(`https://swapi.co/api/people/`).then(resp => {
+      setStarWarsChar(resp.data.results);
+      console.log(resp.data.results);
+
+     });
+  }, []);
+
+
   return (
-    <div className="App">
-      <h1 className="Header">React Wars</h1>
+      <div className="App">
+        <h1 className="Header">React Wars</h1>
+      <Div>
+     {starWarschar.map(char => {
+      return <StarWarsChar char={char} key={char.name} />;
+      // <Pages peoplePerPage={pplPerPage} totalPeople={people.length} paginate={paginate}/>
+     })}
+     </Div>
     </div>
-  );
-}
+    );
+  };
 
 export default App;
